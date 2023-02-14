@@ -8,12 +8,12 @@ import {
   Typography,
   Avatar,
 } from "@pankod/refine-mui";
-import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
 
-import { ColorModeContext } from "contexts";
+//import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
+//import { ColorModeContext } from "contexts";
 
 export const Header: React.FC = () => {
-  const { mode, setMode } = useContext(ColorModeContext);
+  //const { mode, setMode } = useContext(ColorModeContext);
 
   const { data: user } = useGetIdentity();
   const shouldRenderHeader = true; // since we are using the dark/light toggle; we don't need to check if user is logged in or not.
