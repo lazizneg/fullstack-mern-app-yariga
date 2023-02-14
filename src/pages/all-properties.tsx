@@ -9,6 +9,15 @@ import { PropertyCard, CustomButton } from 'components';
 const AllProperties = () => {
   const navigate = useNavigate();
 
+  const {
+    tableQueryResult: { data, isLoading, isError }
+  } = useTable();
+
+  const allProperties = data?.data ?? [];
+
+  if (isLoading) return <Typography>Loading...</Typography>;
+  if (isError) return <Typography>Error...</Typography>;
+
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignContent="center">
@@ -21,6 +30,19 @@ const AllProperties = () => {
           icon={<Add />}
         />
       </Stack>
+
+      <Box mt="20px" sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
+        {allProperties.map((property) => (
+          <PropertyCard
+            key={property._id}
+            id={property._id}
+            title={property.title}
+            location={property.location}
+            price={property.price}
+            photo={property.photo}
+        />
+        ))}
+      </Box>
     </Box>
   )
 }
