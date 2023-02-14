@@ -11,6 +11,7 @@ const CreateProperty = () => {
   const { refineCore: { onFinish, formLoading }, register, handleSubmit } = useForm();
 
   const handleImageChange  = () => {}
+  
   const onFinishHandler = () => {}
 
   return (
