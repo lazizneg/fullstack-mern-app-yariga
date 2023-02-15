@@ -26,6 +26,21 @@ const PropertyDetails = () => {
 
   const isCurrentUser = user.email === propertyDetails.creator.email;
 
+  const handleDeleteProperty = () => {
+    // eslint-disable-next-line no-restricted-globals
+    const response = confirm('Are You Sure You Want To Delete This Property?');
+    if (response) {
+      mutate({
+        resource: 'properties',
+        id: id as string,
+      }, {
+        onSuccess: () => {
+          navigate('/properties');
+        },
+      });
+    }
+  };
+
   return (
     <Box
       borderRadius="15px"
@@ -128,7 +143,9 @@ const PropertyDetails = () => {
                 color="#FCFCFC"
                 fullWidth
                 icon={!isCurrentUser ? <Phone /> : <Delete />}
-                handleClick={() => {}}
+                handleClick={() => {
+                  if (isCurrentUser) handleDeleteProperty();
+                }}
               />
             </Stack>
           </Stack>
