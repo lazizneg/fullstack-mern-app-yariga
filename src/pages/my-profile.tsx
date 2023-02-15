@@ -1,9 +1,33 @@
-import React from 'react'
+import { useGetIdentity, useOne } from '@pankod/refine-core';
 
-const myProfile = () => {
+import { Profile } from 'components';
+
+const MyProfile = () => {
+  const { data: user } = useGetIdentity();
+  const { data, isLoading, isError } = useOne({
+    resource: 'users',
+    id: user?.userid,
+  });
+
+  const myProfile = data?.data ?? [];
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error...</div>;
+  }
+
   return (
-    <div>my-profile</div>
-  )
-}
+    <Profile 
+    type="My"
+    name={myProfile?.name}
+    avatar={myProfile?.avatar}
+    email={myProfile?.email}
+    properties={myProfile?.allProperties}
+    />
+  );
+};
 
-export default myProfile
+export default MyProfile;
